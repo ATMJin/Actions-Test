@@ -9,7 +9,7 @@ jobs:
   call:
     runs-on: ubuntu-latest          # GitHub 代管 runner
     steps:
-      - name: Check out repo
+      - name: Check out repoinit
         uses: actions/checkout@v4
 
       - name: Call API
