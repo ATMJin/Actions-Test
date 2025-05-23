@@ -1,15 +1,16 @@
-name: scheduled-api-call            # 工作流程名稱（隨意）
+name: scheduled-api-call
 
 on:
   schedule:
-    - cron: '*/10 * * * *'          # 每 10 分鐘（最小 5 分鐘）:contentReference[oaicite:1]{index=1}
-  workflow_dispatch:                # 允許手動觸發（方便測試）
+    - cron: '30 20 23 5 *'   # UTC 時間：5/23 晚上 21:00
+  workflow_dispatch:        # 可手動觸發
 
 jobs:
   call:
-    runs-on: ubuntu-latest          # GitHub 代管 runner
+    if: github.event_name == 'schedule' && github.event.schedule == '30 20 23 5 *'
+    runs-on: ubuntu-latest
     steps:
-      - name: Check out repoinit
+      - name: Check out repo
         uses: actions/checkout@v4
 
       - name: Call API
